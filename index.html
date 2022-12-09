@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         body{
+            padding: 10px ,50px;
+            color: blueviolet;
+        }
+        .formdesign{
+            
+            font-size: 20px;
+        
+        }
+        .formdesign input{
+            width: 50%;
+            padding: 10px 20px;
+            border: 2px solid blue;
+            margin: 14px;
+            border-radius: 4px;
+            font-size: 15px;
+
+        }
+        .button{
+            color: rgb(73, 19, 235);
+            border-radius: 3px ;
+            border: 2px solid blue;
+            width: 100px;
+            height: 40px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+    <h1>welcome to validation form</h1>
+    <form action="" name="myForm" onsubmit="return validateForm()" method="post">
+        <div class="formdesign" id="name">
+
+            Name: <input type="text" name="fname"> <b><span class="formerror"> </span></b>
+        </div>
+        <div class="formdesign"id="email">
+
+            Email: <input type="email" name="femail"><b><span class="formerror" ></span></b>
+        </div>
+        <div class="formdesign"id="phone">
+
+            Phone: <input type="phone" name="fphone" ><b><span class="formerror" ></span></b>
+        </div>
+        <div class="formdesign"id="password">
+
+            Password: <input type="password" name="fpassword"><b><span class="formerror"></span></b>
+        </div>
+        <div class="formdesign"id="cpassword">
+
+            Conform password: <input type="password" name="fcpassword"><b><span class="formerror"></span></b>
+        </div>
+        <input  class="button" type="submit" value="submit">
+    </form>
+    </center>
+    
+    <script>
+        function clearErrors(){
+            error=document.getElementsByClassName("formerror");
+            for (let item of error) {
+                item.innerHTML=" ";
+                
+                
+            }
+        }
+        
+        function seterror(id,error) {
+            element=document.getElementById(id);
+            element.getElementsByClassName("formerror")[0].innerHTML=error;
+             
+        }
+        function validateForm() {
+            var returnval=true;
+            clearErrors();
+
+            var name=document.forms["myForm"]["fname"].value;
+            if(name.length<5){
+                seterror("name","length of name too short");
+                returnval=false;
+            }
+            var email=document.forms["myForm"]["femail"].value;
+            if(email.length>12){
+                seterror("email","email is too  short");
+                returnval=false;
+            }
+            var phone=document.forms["myForm"]["fphone"].value;
+            if(phone.length!=11){
+                seterror("phone","phone number should be 10 digit");
+                returnval=false;
+            }
+            var password=document.forms["myForm"]["fpassword"].value;
+            if(password.length<6){
+                seterror("password","password should atlesat 6 characters long");
+                returnval=false;
+            }
+            var cpassword=document.forms["myForm"]["fcpassword"].value;
+            if(cpassword!=password){
+                seterror("cpassword","password and confirm password should match");
+                returnval=false;
+            }
+            
+    
+
+            return returnval;
+        }
+    
+    </script>
+
+</body>
+
+</html>
